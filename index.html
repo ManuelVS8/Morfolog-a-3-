@@ -8,106 +8,123 @@
 <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/ManuelVS8/Audios-juegos-SCIENCE/refs/heads/main/icono.ico">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#001DFF;--blue-dark:#04032B;--blue-700:#1a3a5f;--blue-600:#254fba;--orange:#f59e42;--orange-700:#e67e22;--bg1:#1a3a5f;--bg2:#0d2340;--white:#fff;--green:#2ecc71;--red:#e74c3c;--panel:#E8EAFF;--cat-sust:#8B5CF6;--cat-adj:#16a34a;--cat-det:#2563eb;--cat-verb:#f59e42;--cat-pron:#dc2626}
+:root{--blue:#001DFF;--blue-dark:#04032B;--blue-700:#1a3a5f;--orange:#f59e42;--orange-700:#e67e22;--bg1:#1a3a5f;--bg2:#0d2340;--white:#fff;--green:#2ecc71;--red:#e74c3c;--panel:#E8EAFF}
 body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,var(--bg1),var(--bg2));min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:20px 12px 48px;color:#333}
-.game-container{background:var(--white);border-radius:16px;box-shadow:0 12px 24px rgba(0,0,0,.12);padding:1.2rem;max-width:980px;width:100%;min-height:640px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.game-container{background:var(--white);border-radius:16px;box-shadow:0 12px 24px rgba(0,0,0,.12);padding:1.2rem;max-width:980px;width:100%;min-height:640px;position:relative;overflow:visible;display:flex;flex-direction:column}
 header{text-align:center;margin-bottom:.8rem;margin-top:1.5rem}
 h1{color:var(--blue-dark);font-size:clamp(2rem,5.2vw,3.1rem);font-weight:900;letter-spacing:.5px}
 .subtitle{color:var(--blue-700);font-size:clamp(1rem,3.5vw,1.25rem);margin-top:.25rem}
 .highlight-orange{color:var(--orange);font-weight:800}
-.btn{color:#fff;border:none;padding:.75rem 1.2rem;border-radius:10px;cursor:pointer;font-weight:800;transition:transform .08s ease,box-shadow .2s ease,background-color .25s ease;min-width:140px;height:48px;display:inline-flex;align-items:center;justify-content:center;font-size:1rem}
-.btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.12)}
-.btn:active{transform:translateY(0)}
-.btn-primary{background:var(--orange)}
-.btn-primary:hover{background:var(--orange-700)}
+.btn{color:#fff;border:none;padding:.75rem 1.2rem;border-radius:10px;cursor:pointer;font-weight:800;transition:transform .08s ease,box-shadow .2s ease;min-width:140px;height:48px;display:inline-flex;align-items:center;justify-content:center;font-size:1rem}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.12)}.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--orange)}.btn-primary:hover{background:var(--orange-700)}
 .btn-ghost{background:#e6f2ff;color:var(--blue-700)}
-.screen{display:none;animation:fadeIn .35s ease}
-.screen.active{display:block}
+.screen{display:none;animation:fadeIn .35s ease}.screen.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .game-info{display:flex;gap:.6rem;align-items:center;justify-content:space-between;margin:.4rem 0 1rem;flex-wrap:wrap}
 .timer{font-weight:900;color:var(--blue-700);font-size:clamp(.95rem,2.3vw,1.15rem)}
-.progress-bar{flex:1;height:12px;background:#e6f2ff;border-radius:6px;overflow:hidden;display:flex;gap:4px;padding:2px}
-.progress-segment{flex:1;background:#d1d5db;border-radius:4px;transition:background-color .4s ease}
-.progress-segment.filled{background:linear-gradient(90deg,var(--orange),var(--orange-700))}
+.progress-bar{flex:1;height:12px;background:#e6f2ff;border-radius:6px;overflow:hidden;display:flex;gap:0;padding:0}
 .start-content{display:flex;flex-direction:column;justify-content:center;align-items:center;flex:1;gap:1rem;padding:1rem}
 .advice-box{background:var(--panel);border-left:4px solid var(--blue-700);padding:1rem 1.2rem;border-radius:12px;color:var(--blue-700);max-width:760px;text-align:center;font-size:clamp(1rem,3vw,1.15rem)}
 .start-image{max-width:300px;width:100%;margin:0 auto}
 .mute-btn{position:absolute;top:.8rem;right:1rem;background:linear-gradient(135deg,var(--orange),var(--orange-700));color:#fff;border:2px solid #fff;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:20;padding:0;transition:transform .1s}
-.mute-btn:hover{transform:scale(1.1)}
-.mute-btn svg{width:20px;height:20px;fill:white}
-.theory-content{padding:10px;margin:10px 0;display:flex;flex-direction:column;gap:12px}
+.mute-btn:hover{transform:scale(1.1)}.mute-btn svg{width:20px;height:20px;fill:white}
+.theory-content{padding:10px;margin:10px 0;display:flex;flex-direction:column;gap:12px;}
 .theory-main-title{text-align:center;color:var(--blue-dark);font-size:1.4rem;font-weight:800;margin-bottom:5px}
 .theory-intro{text-align:center;color:#555;margin-bottom:10px;font-size:1rem}
 .change-block{border-radius:15px;padding:20px;box-shadow:0 4px 10px rgba(0,0,0,.08)}
-.change-block.sb-purple{background:#ede9fe;border:2px solid #c4b5fd}
-.change-block.sb-green{background:#dcfce7;border:2px solid #86efac}
-.change-block.sb-blue{background:#fef9c3;border:2px solid #fde047}
-.change-block.sb-orange{background:#ffedd5;border:2px solid #fdba74}
-.change-block.sb-rose{background:#fee2e2;border:2px solid #fca5a5}
+.change-block.sb-purple{background:#ede9fe;border:2px solid #c4b5fd}.change-block.sb-green{background:#dcfce7;border:2px solid #86efac}.change-block.sb-blue{background:#fef9c3;border:2px solid #fde047}.change-block.sb-orange{background:#ffedd5;border:2px solid #fdba74}.change-block.sb-rose{background:#fee2e2;border:2px solid #fca5a5}
 .block-title{font-size:1.3rem;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:10px}
 .sb-purple .block-title{color:#5b21b6}.sb-green .block-title{color:#15803d}.sb-blue .block-title{color:#a16207}.sb-orange .block-title{color:#c2410c}.sb-rose .block-title{color:#dc2626}
 .block-desc{font-size:.95rem;margin-bottom:10px;color:#444}
-.example-list{list-style:none;padding:0}
-.example-list li{position:relative;padding-left:20px;margin-bottom:6px;font-size:.9rem;color:#333;line-height:1.5}
+.example-list{list-style:none;padding:0}.example-list li{position:relative;padding-left:20px;margin-bottom:6px;font-size:.9rem;color:#333;line-height:1.5}
 .example-list li::before{content:'•';position:absolute;left:0;font-weight:bold}
 .sb-purple .example-list li::before{color:#5b21b6}.sb-green .example-list li::before{color:#15803d}.sb-blue .example-list li::before{color:#a16207}.sb-orange .example-list li::before{color:#c2410c}.sb-rose .example-list li::before{color:#dc2626}
-.example-list strong{color:#000}
-.play-btn-container{text-align:center;margin-top:auto;padding-top:10px}
+.example-list strong{color:#000}.play-btn-container{text-align:center;margin-top:auto;padding-top:10px}
 .cards-container{display:grid;gap:15px;margin:20px 0;justify-content:center}
-
-/* JUEGO 1: 2 COLUMNAS FIJAS SIEMPRE */
-#matchGrid{grid-template-columns:1fr 1fr; max-width: 800px; margin-left: auto; margin-right: auto;}
-/* JUEGO 2: 4 COLUMNAS EN PC, 2 EN MÓVIL */
-#identifyGrid{grid-template-columns:repeat(4, 1fr);}
-@media(max-width:600px){#identifyGrid{grid-template-columns:repeat(2,1fr);gap:10px}.memory-card{font-size:.8rem;padding:10px}}
-
-.memory-card{background-color:#3498db;color:white;border:3px solid transparent;border-radius:10px;padding:15px 5px;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease;text-align:center;min-height:100px;display:flex;align-items:center;justify-content:center;font-size:clamp(.85rem, 1.5vw, .95rem);font-weight:bold;user-select:none}
-.memory-card:hover{transform:scale(1.05);box-shadow:0 4px 8px rgba(0,0,0,.2)}
-.memory-card.selected{background-color:#f1c40f;transform:scale(1.05);color:white}
-.memory-card.matched{background-color:#27ae60;color:white;cursor:default}
+#matchGrid{grid-template-columns:1fr 1fr;max-width:800px;margin-left:auto;margin-right:auto}
+#identifyGrid{grid-template-columns:repeat(4,1fr)}
+@media(max-width:600px){#identifyGrid{grid-template-columns:repeat(2,1fr);gap:10px}.memory-card{font-size:.8rem;padding:8px}}
+.memory-card{background-color:#3498db;color:white;border:3px solid transparent;border-radius:10px;padding:10px 5px;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease;text-align:center;height:70px;display:flex;align-items:center;justify-content:center;font-size:clamp(.85rem,1.5vw,.95rem);font-weight:bold;user-select:none}
+.memory-card:hover{transform:scale(1.05);box-shadow:0 4px 8px rgba(0,0,0,.2)}.memory-card.selected{background-color:#f1c40f;transform:scale(1.05)}.memory-card.matched{background-color:#27ae60;cursor:default}
 .memory-card.flash-error{animation:shakeRed .3s ease-in-out}
 @keyframes shakeRed{0%{background-color:#3498db;transform:translateX(0)}20%{background-color:#e74c3c;transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}100%{background-color:#3498db;transform:translateX(0)}}
 .results{display:flex;flex-direction:column;align-items:center;gap:.6rem;text-align:center;justify-content:center;padding:1rem 0}
-.final-title{color:var(--blue-dark);font-weight:900}
-.big-score{font-size:clamp(2.2rem,6vw,3.4rem);color:var(--blue-600);font-weight:900}
-.score-title{font-size:1rem;color:var(--blue-700);margin-top:1rem}
-.final-time{color:var(--blue-700)}
+.final-title{color:var(--blue-dark);font-weight:900}.big-score{font-size:clamp(2.2rem,6vw,3.4rem);color:var(--blue-600);font-weight:900}.score-title{font-size:1rem;color:var(--blue-700);margin-top:1rem}.final-time{color:var(--blue-700)}
 #trophyBox{display:none;font-size:clamp(4rem,10vw,7rem);margin:.5rem 0;text-align:center;animation:bounce 1s ease infinite;color:var(--orange);line-height:1}
 @keyframes bounce{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-15px) scale(1.1)}}
-.credit{color:var(--blue-700);margin-top:1rem}
-#finalMsg{font-size:clamp(1.2rem,4.2vw,1.8rem);font-weight:800;color:var(--blue-700);margin-top:.6rem}
+.credit{color:var(--blue-700);margin-top:1rem}#finalMsg{font-size:clamp(1.2rem,4.2vw,1.8rem);font-weight:800;color:var(--blue-700);margin-top:.6rem}
 .school-logo{display:block;width:160px;max-width:28%;height:auto;margin-top:.8rem;border-radius:8px;object-fit:contain}
+
+/* ─── SENTENCE BOX ─── */
 .sentence-box{background:var(--panel);padding:1.2rem;border-radius:12px;text-align:center;font-size:clamp(1.1rem,3vw,1.35rem);font-weight:700;color:var(--blue-dark);margin-bottom:1.2rem;line-height:1.6;border:2px solid #c7d2fe}
-.words-area{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-bottom:1rem;min-height:60px;align-items:center}
-.ctx-word{position:relative;background:#d4e6ff;padding:10px 16px;border-radius:10px;font-size:clamp(1rem,2.8vw,1.2rem);font-weight:700;color:var(--blue-dark);cursor:pointer;user-select:none;transition:transform .15s,box-shadow .15s, background-color .2s;display:inline-block}
+
+/* ─── WORDS AREA: posición relativa para anclar el menú ─── */
+.words-area{
+  position:relative;
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  justify-content:center;
+  align-items:flex-start;
+  margin-bottom:1rem;
+  min-height:60px;
+  padding-bottom:230px; /* espacio reservado para el menú desplegado */
+}
+
+/* ─── PALABRAS ─── */
+.ctx-word{
+  background:#d4e6ff;
+  padding:10px 16px;
+  border-radius:10px;
+  font-size:clamp(1rem,2.8vw,1.2rem);
+  font-weight:700;
+  color:var(--blue-dark);
+  cursor:pointer;
+  user-select:none;
+  transition:transform .15s,box-shadow .15s,background-color .2s;
+  display:inline-block;
+  position:relative; /* necesario para calcular offsets */
+  z-index:1;
+}
 .ctx-word:hover{transform:scale(1.05);box-shadow:0 3px 8px rgba(0,0,0,.12)}
 .ctx-word.solved{cursor:default;pointer-events:none;color:white}
-/* COLORES PASTEL AL ACERTAR */
-.ctx-word.cat-sust{background:#c4b5fd; color: #3b0764}
-.ctx-word.cat-adj{background:#86efac; color: #14532d}
-.ctx-word.cat-det{background:#fde047; color: #713f12}
-.ctx-word.cat-verb{background:#fdba74; color: #7c2d12}
-.ctx-word.cat-pron{background:#fca5a5; color: #7f1d1d}
+.ctx-word.cat-sust{background:#c4b5fd;color:#3b0764}
+.ctx-word.cat-adj{background:#86efac;color:#14532d}
+.ctx-word.cat-det{background:#fde047;color:#713f12}
+.ctx-word.cat-verb{background:#fdba74;color:#7c2d12}
+.ctx-word.cat-pron{background:#fca5a5;color:#7f1d1d}
+.ctx-word.active{background-color:#3498db !important;color:white !important;transform:scale(1.08);box-shadow:0 4px 12px rgba(52,152,219,.5)}
 
-/* MENÚ DESPLEGABLE PRINCIPAL */
-.ctx-menu{position:absolute;top:120%;left:50%;transform:translateX(-50%);background:white;border:2px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.15);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50;overflow:visible;min-width:250px; padding:6px 0;}
-.ctx-menu.show{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0)}
-.ctx-menu-btn{display:block;width:100%;padding:12px 16px;border:none;font-family:inherit;font-size:1.05rem;font-weight:700;cursor:pointer;text-align:center;transition:filter .15s, transform .15s;margin: 3px 0; border-radius: 8px; color: #333; position: relative;}
-.ctx-menu-btn:hover{transform: scale(1.03); filter: brightness(0.95);}
-.ctx-menu-btn.btn-sust{background-color: #ede9fe; color: #5b21b6;}
-.ctx-menu-btn.btn-adj{background-color: #dcfce7; color: #15803d;}
-.ctx-menu-btn.btn-det{background-color: #fef9c3; color: #a16207;}
-.ctx-menu-btn.btn-verb{background-color: #ffedd5; color: #c2410c;}
-.ctx-menu-btn.btn-pron{background-color: #fee2e2; color: #dc2626;}
+/* ─── MENÚ FLOTANTE: oculto por defecto, nunca ocupa espacio en el flujo ─── */
+#floatingMenu,#floatingMenuP{position:absolute;display:none;background:white;border:2px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.18);z-index:100;min-width:260px;padding:6px;flex-direction:column;gap:5px;opacity:0;transition:opacity .18s ease}
+#floatingMenu.show,#floatingMenuP.show{display:flex;opacity:1;pointer-events:all}
+#floatingMenu::before,#floatingMenuP::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:8px solid #e5e7eb}
+#floatingMenu::after,#floatingMenuP::after{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid white}
 
-/* SUBMENÚ PARA DETERMINANTES */
-.det-submenu{position:absolute;top:0;left:105%;background:white;border:2px solid #fde047;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.15);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s;z-index:60;width:180px;padding:4px 0;display:flex;flex-direction:column;gap:2px}
-.det-submenu.show{opacity:1;visibility:visible;pointer-events:all}
-.det-sub-btn{padding:10px;background:#fefce8;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:.95rem;color:#a16207;transition:background .15s}
-.det-sub-btn:hover{background:#fef08a}
+.ctx-menu-btn{
+  display:block;
+  width:100%;
+  padding:12px 10px;
+  border:none;
+  font-family:inherit;
+  font-size:1.05rem;
+  font-weight:700;
+  cursor:pointer;
+  text-align:center;
+  transition:filter .15s,transform .15s;
+  margin:0;
+  border-radius:8px;
+  color:#333;
+}
+.ctx-menu-btn:active{transform:scale(0.95)}
+.ctx-menu-btn.btn-sust{background-color:#ede9fe;color:#5b21b6}
+.ctx-menu-btn.btn-adj{background-color:#dcfce7;color:#15803d}
+.ctx-menu-btn.btn-det{background-color:#fef9c3;color:#a16207}
+.ctx-menu-btn.btn-verb{background-color:#ffedd5;color:#c2410c}
+.ctx-menu-btn.btn-pron{background-color:#fee2e2;color:#dc2626}
+.ctx-menu-btn.sub-btn{background-color:#fefce8;color:#713f12;font-size:.95rem}
 
-.feedback-msg{text-align:center;font-size:1.1rem;font-weight:700;min-height:30px;margin-bottom:.5rem}
-.feedback-msg.ok{color:var(--green)}.feedback-msg.err{color:var(--red)}
 .practice-complete{text-align:center;padding:2rem 1rem}
 .confetti{position:fixed;width:10px;height:10px;border-radius:50%;animation:confetti-fall 3s linear forwards;z-index:999}
 @keyframes confetti-fall{0%{transform:translate(0,-20px) rotate(0);opacity:1}100%{transform:translate(var(--tx),var(--ty)) rotate(360deg);opacity:0}}
@@ -115,9 +132,7 @@ h1{color:var(--blue-dark);font-size:clamp(2rem,5.2vw,3.1rem);font-weight:900;let
 </head>
 <body>
 <div class="game-container">
-<button class="mute-btn" id="muteBtn" title="Silenciar/Activar sonido">
-<svg id="iconSpeaker" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-</button>
+<button class="mute-btn" id="muteBtn" title="Silenciar/Activar sonido"><svg id="iconSpeaker" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></button>
 
 <section class="screen active" id="startScreen">
 <header><h1>Análisis morfológico</h1><div class="subtitle">Identifica en las siguientes oraciones las palabras que hemos trabajado</div></header>
@@ -148,21 +163,19 @@ h1{color:var(--blue-dark);font-size:clamp(2rem,5.2vw,3.1rem);font-weight:900;let
 <div class="cards-container" id="matchGrid"></div>
 </section>
 
-<section class="screen" id="game2Screen">
-<header><h1>Identifica las palabras</h1><div class="subtitle" id="g2Subtitle">Nivel 1: Sustantivos</div></header>
-<div class="game-info"><div class="timer" id="timerG2">00:00.0</div><div class="progress-bar" id="progG2" style="display:flex;gap:0;padding:0"><div class="progress-fill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--orange),var(--orange-700));transition:width .3s ease;border-radius:999px"></div></div></div>
-<div class="cards-container" id="identifyGrid"></div>
-</section>
+
 
 <section class="screen" id="game3Screen">
 <header><h1>Análisis morfológico</h1></header>
-<div class="game-info"><div class="timer" id="timerG3">00:00.0</div>
-<div class="progress-bar" id="progG3">
-    <div class="progress-segment" id="segG3_0"></div><div class="progress-segment" id="segG3_1"></div><div class="progress-segment" id="segG3_2"></div><div class="progress-segment" id="segG3_3"></div><div class="progress-segment" id="segG3_4"></div>
-</div></div>
+<div class="game-info">
+  <div class="timer" id="timerG3">00:00.0</div>
+  <div class="progress-bar" id="progG3" style="display:flex;gap:0;padding:0"><div class="progress-fill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--orange),var(--orange-700));transition:width .3s ease;border-radius:999px"></div></div>
+</div>
 <div class="sentence-box" id="sentenceBox"></div>
-<div class="words-area" id="wordsArea"></div>
-<div class="feedback-msg" id="feedbackMsg"></div>
+<!-- El menú flotante es HIJO del words-area para que position:absolute sea relativo a él -->
+<div class="words-area" id="wordsArea">
+  <div id="floatingMenu"></div>
+</div>
 </section>
 
 <section class="screen" id="finalScreen">
@@ -179,11 +192,16 @@ h1{color:var(--blue-dark);font-size:clamp(2rem,5.2vw,3.1rem);font-weight:900;let
 
 <section class="screen" id="practiceScreen">
 <header><h1>Modo práctica</h1></header>
-<div class="game-info"><div class="timer" id="timerGP">00:00.0</div>
-<div class="progress-bar" id="progGP" style="display:flex;gap:0;padding:0"><div class="progress-fill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--orange),var(--orange-700));transition:width .3s ease;border-radius:999px"></div></div></div>
+<div class="game-info">
+  <div class="timer" id="timerGP">00:00.0</div>
+  <div class="progress-bar" id="progGP" style="display:flex;gap:0;padding:0">
+    <div class="progress-fill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--orange),var(--orange-700));transition:width .3s ease;border-radius:999px"></div>
+  </div>
+</div>
 <div class="sentence-box" id="practiceSentence"></div>
-<div class="words-area" id="practiceWords"></div>
-<div class="feedback-msg" id="practiceFeedback"></div>
+<div class="words-area" id="practiceWords">
+  <div id="floatingMenuP"></div>
+</div>
 </section>
 
 <section class="screen" id="practiceDoneScreen">
@@ -215,142 +233,232 @@ document.getElementById('startBtn').onclick=function(){playS('tap');showScreen('
 document.getElementById('playBtn').onclick=function(){playS('tap');totalAttempts=0;startTimer();initGame1()};
 document.getElementById('muteBtn').onclick=function(){soundEnabled=!soundEnabled;document.getElementById('iconSpeaker').innerHTML=soundEnabled?'<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>':'<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';};
 
+/* ════════════════════════════════
+   JUEGO 1 – Emparejar
+════════════════════════════════ */
 var matchPairs=[{term:'Sustantivo',def:'Nombran personas, animales y cosas'},{term:'Adjetivo',def:'Dicen cómo es el sustantivo'},{term:'Determinante',def:'Va delante del sustantivo'},{term:'Verbo',def:'Son acciones'},{term:'Pronombre personal',def:'Sustituyen al nombre'}];
 var m1Sel=null,m1Matched=0;
 function initGame1(){showScreen('game1Screen');m1Sel=null;m1Matched=0;document.getElementById('progG1').querySelector('.progress-fill').style.width='0%';var grid=document.getElementById('matchGrid');grid.innerHTML='';var terms=shuffle(matchPairs.map(function(p){return{text:p.term,pair:p.term,type:'term'}}));var defs=shuffle(matchPairs.map(function(p){return{text:p.def,pair:p.term,type:'def'}}));var cL=document.createElement('div');cL.style.cssText='display:flex;flex-direction:column;gap:12px';var cR=document.createElement('div');cR.style.cssText='display:flex;flex-direction:column;gap:12px';terms.forEach(function(t){var c=document.createElement('div');c.className='memory-card';c.textContent=t.text;c.dataset.pair=t.pair;c.dataset.type=t.type;c.onclick=function(){selMatchCard(this)};cL.appendChild(c)});defs.forEach(function(d){var c=document.createElement('div');c.className='memory-card';c.textContent=d.text;c.dataset.pair=d.pair;c.dataset.type=d.type;c.onclick=function(){selMatchCard(this)};cR.appendChild(c)});grid.appendChild(cL);grid.appendChild(cR)}
-function selMatchCard(card){if(card.classList.contains('matched')||m1Sel===card)return;if(!m1Sel){playS('tap');card.classList.add('selected');m1Sel=card;return}var first=m1Sel;if(first.dataset.type===card.dataset.type){first.classList.remove('selected');playS('tap');card.classList.add('selected');m1Sel=card;return}totalAttempts++;if(first.dataset.pair===card.dataset.pair){playS('correct');first.classList.remove('selected');card.classList.remove('selected');first.classList.add('matched');card.classList.add('matched');m1Sel=null;m1Matched++;document.getElementById('progG1').querySelector('.progress-fill').style.width=(m1Matched/matchPairs.length*100)+'%';if(m1Matched===matchPairs.length)setTimeout(initGame2,600)}else{playS('error');card.classList.add('selected','flash-error');first.classList.add('flash-error');setTimeout(function(){card.classList.remove('selected','flash-error');first.classList.remove('selected','flash-error');m1Sel=null},300)}}
+function selMatchCard(card){if(card.classList.contains('matched')||m1Sel===card)return;if(!m1Sel){playS('tap');card.classList.add('selected');m1Sel=card;return}var first=m1Sel;if(first.dataset.type===card.dataset.type){first.classList.remove('selected');playS('tap');card.classList.add('selected');m1Sel=card;return}totalAttempts++;if(first.dataset.pair===card.dataset.pair){playS('correct');first.classList.remove('selected');card.classList.remove('selected');first.classList.add('matched');card.classList.add('matched');m1Sel=null;m1Matched++;document.getElementById('progG1').querySelector('.progress-fill').style.width=(m1Matched/matchPairs.length*100)+'%';if(m1Matched===matchPairs.length)setTimeout(initGame3,600)}else{playS('error');card.classList.add('selected','flash-error');first.classList.add('flash-error');setTimeout(function(){card.classList.remove('selected','flash-error');first.classList.remove('selected','flash-error');m1Sel=null},300)}}
 
-var wBank={'Sustantivo':['Perro','Mesa','Barco','Árbol','Libro','Playa','Pelota','Ciudad','León','Lápiz','Guitarra','Colegio','Montaña','Camiseta','Mochila','Avión','Fruta','Parque','Río','Flor'],'Adjetivo':['Grande','Azul','Rápido','Inteligente','Amable','Divertido','Frío','Caliente','Valiente','Pequeño','Alegre','Triste','Feroz','Suave','Estupendo','Nuevo','Viejo','Brillante','Oscuro','Bonito'],'Determinante':['El','Las','Una','Unos','Este','Esa','Aquella','Estos','Esas','Aquellos','Mi','Tus','Su','Nuestro','Vuestra','Estos','Aquel','Esos','Mis','Sus'],'Verbo':['Correr','Saltar','Estudiar','Cantar','Leer','Escribir','Jugar','Comer','Dormir','Dibujar','Bailar','Nadar','Cocinar','Pintar','Reír','Soñar','Viajar','Escuchar','Mirar','Abrir'],'Pronombre personal':['Yo','Tú','Él','Ella','Nosotros','Nosotras','Vosotros','Vosotras','Ellos','Ellas']};
-var cats=['Sustantivo','Adjetivo','Determinante','Verbo','Pronombre personal'];
-var g2Levels,g2CurLvl,g2Found,g2Total;
-function initGame2(){g2Levels=shuffle(cats.slice());g2CurLvl=0;g2Found=0;g2Total=25;document.getElementById('progG2').querySelector('.progress-fill').style.width='0%';loadG2Level();showScreen('game2Screen')}
-function loadG2Level(){var cat=g2Levels[g2CurLvl];g2Found=0;document.getElementById('g2Subtitle').textContent='Nivel '+(g2CurLvl+1)+': '+cat;var correct=shuffle(wBank[cat].slice()).slice(0,5);var wrongs=[];var others=cats.filter(function(c){return c!==cat});others.forEach(function(oc){var pool=wBank[oc].filter(function(w){return correct.indexOf(w)===-1&&wrongs.indexOf(w)===-1});if(pool.length)wrongs.push(pool[Math.floor(Math.random()*pool.length)])});while(wrongs.length<7){var all=[];others.forEach(function(oc){wBank[oc].forEach(function(w){if(correct.indexOf(w)===-1&&wrongs.indexOf(w)===-1)all.push(w)})});if(!all.length)break;wrongs.push(all.splice(Math.floor(Math.random()*all.length),1)[0])}var all=shuffle(correct.concat(wrongs.slice(0,7)));var grid=document.getElementById('identifyGrid');grid.innerHTML='';all.forEach(function(w){var c=document.createElement('div');c.className='memory-card';c.textContent=w;c.dataset.ok=correct.indexOf(w)!==-1?'1':'0';c.onclick=function(){selIdentCard(this)};grid.appendChild(c)})}
-function selIdentCard(card){if(card.classList.contains('matched')||card.classList.contains('selected'))return;if(card.dataset.ok==='1'){playS('correct');totalAttempts++;card.classList.remove('selected');card.classList.add('matched');g2Found++;document.getElementById('progG2').querySelector('.progress-fill').style.width=(g2Found/g2Total*100)+'%';if(g2Found%5===0){playS('completed');setTimeout(function(){g2CurLvl++;if(g2CurLvl<5)loadG2Level();else initGame3()},1000)}}else{playS('error');totalAttempts++;card.classList.add('selected','flash-error');setTimeout(function(){card.classList.remove('selected','flash-error')},300)}}
+/* ════════════════════════════════
+   DATOS – Oraciones
+════════════════════════════════ */
+var allSentences=[{t:'Aquel perro negro corre rápido.',ws:[{w:'Aquel',c:'Determinante',sub:'Demostrativo'},{w:'perro',c:'Sustantivo'},{w:'negro',c:'Adjetivo'},{w:'corre',c:'Verbo'},{w:'rápido',c:'Adjetivo'}]},{t:'La socorrista es una estupenda nadadora.',ws:[{w:'La',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'socorrista',c:'Sustantivo'},{w:'es',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'estupenda',c:'Adjetivo'},{w:'nadadora',c:'Sustantivo'}]},{t:'Aquella mañana olvidé mi jersey rosa.',ws:[{w:'Aquella',c:'Determinante',sub:'Demostrativo'},{w:'mañana',c:'Sustantivo'},{w:'olvidé',c:'Verbo'},{w:'mi',c:'Determinante',sub:'Posesivo'},{w:'jersey',c:'Sustantivo'},{w:'rosa',c:'Adjetivo'}]},{t:'Aquellos pájaros comieron este delicioso alpiste.',ws:[{w:'Aquellos',c:'Determinante',sub:'Demostrativo'},{w:'pájaros',c:'Sustantivo'},{w:'comieron',c:'Verbo'},{w:'este',c:'Determinante',sub:'Demostrativo'},{w:'delicioso',c:'Adjetivo'},{w:'alpiste',c:'Sustantivo'}]},{t:'El hombre alto pintó su antigua casa.',ws:[{w:'El',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'hombre',c:'Sustantivo'},{w:'alto',c:'Adjetivo'},{w:'pintó',c:'Verbo'},{w:'su',c:'Determinante',sub:'Posesivo'},{w:'antigua',c:'Adjetivo'},{w:'casa',c:'Sustantivo'}]},{t:'El mago sacó un conejo blanco.',ws:[{w:'El',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'mago',c:'Sustantivo'},{w:'sacó',c:'Verbo'},{w:'un',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'conejo',c:'Sustantivo'},{w:'blanco',c:'Adjetivo'}]},{t:'Ellos compraron un diamante carísimo.',ws:[{w:'Ellos',c:'Pronombre personal'},{w:'compraron',c:'Verbo'},{w:'un',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'diamante',c:'Sustantivo'},{w:'carísimo',c:'Adjetivo'}]},{t:'Ella leyó unos libros interesantes.',ws:[{w:'Ella',c:'Pronombre personal'},{w:'leyó',c:'Verbo'},{w:'unos',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'libros',c:'Sustantivo'},{w:'interesantes',c:'Adjetivo'}]},{t:'Ella mira las estrellas brillantes.',ws:[{w:'Ella',c:'Pronombre personal'},{w:'mira',c:'Verbo'},{w:'las',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'estrellas',c:'Sustantivo'},{w:'brillantes',c:'Adjetivo'}]},{t:'El guerrero lanzó su lanza afilada.',ws:[{w:'El',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'guerrero',c:'Sustantivo'},{w:'lanzó',c:'Verbo'},{w:'su',c:'Determinante',sub:'Posesivo'},{w:'lanza',c:'Sustantivo'},{w:'afilada',c:'Adjetivo'}]},{t:'Ese libro cuenta una historia misteriosa.',ws:[{w:'Ese',c:'Determinante',sub:'Demostrativo'},{w:'libro',c:'Sustantivo'},{w:'cuenta',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'historia',c:'Sustantivo'},{w:'misteriosa',c:'Adjetivo'}]},{t:'Ese rico pastel tiene las velas encendidas.',ws:[{w:'Ese',c:'Determinante',sub:'Demostrativo'},{w:'rico',c:'Adjetivo'},{w:'pastel',c:'Sustantivo'},{w:'tiene',c:'Verbo'},{w:'las',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'velas',c:'Sustantivo'},{w:'encendidas',c:'Adjetivo'}]},{t:'Esta tarde arreglaré mi bicicleta vieja.',ws:[{w:'Esta',c:'Determinante',sub:'Demostrativo'},{w:'tarde',c:'Sustantivo'},{w:'arreglaré',c:'Verbo'},{w:'mi',c:'Determinante',sub:'Posesivo'},{w:'bicicleta',c:'Sustantivo'},{w:'vieja',c:'Adjetivo'}]},{t:'Esta tarde escribiré una bonita carta.',ws:[{w:'Esta',c:'Determinante',sub:'Demostrativo'},{w:'tarde',c:'Sustantivo'},{w:'escribiré',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'bonita',c:'Adjetivo'},{w:'carta',c:'Sustantivo'}]},{t:'Juan cantó una canción preciosa.',ws:[{w:'Juan',c:'Sustantivo'},{w:'cantó',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'canción',c:'Sustantivo'},{w:'preciosa',c:'Adjetivo'}]},{t:'Juan preparó una cena deliciosa.',ws:[{w:'Juan',c:'Sustantivo'},{w:'preparó',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'cena',c:'Sustantivo'},{w:'deliciosa',c:'Adjetivo'}]},{t:'La antigua casa tiene unas ventanas pequeñas.',ws:[{w:'La',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'antigua',c:'Adjetivo'},{w:'casa',c:'Sustantivo'},{w:'tiene',c:'Verbo'},{w:'unas',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'ventanas',c:'Sustantivo'},{w:'pequeñas',c:'Adjetivo'}]},{t:'Las jugadoras firmaron mi camiseta deportiva.',ws:[{w:'Las',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'jugadoras',c:'Sustantivo'},{w:'firmaron',c:'Verbo'},{w:'mi',c:'Determinante',sub:'Posesivo'},{w:'camiseta',c:'Sustantivo'},{w:'deportiva',c:'Adjetivo'}]},{t:'Los bomberos apagaron este gran incendio.',ws:[{w:'Los',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'bomberos',c:'Sustantivo'},{w:'apagaron',c:'Verbo'},{w:'este',c:'Determinante',sub:'Demostrativo'},{w:'gran',c:'Adjetivo'},{w:'incendio',c:'Sustantivo'}]},{t:'Los bomberos rescatan un perro herido.',ws:[{w:'Los',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'bomberos',c:'Sustantivo'},{w:'rescatan',c:'Verbo'},{w:'un',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'perro',c:'Sustantivo'},{w:'herido',c:'Adjetivo'}]},{t:'Los científicos encontraron una nueva vacuna.',ws:[{w:'Los',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'científicos',c:'Sustantivo'},{w:'encontraron',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'nueva',c:'Adjetivo'},{w:'vacuna',c:'Sustantivo'}]},{t:'Los hombres cavernícolas lanzaban lanzas afiladas.',ws:[{w:'Los',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'hombres',c:'Sustantivo'},{w:'cavernícolas',c:'Adjetivo'},{w:'lanzaban',c:'Verbo'},{w:'lanzas',c:'Sustantivo'},{w:'afiladas',c:'Adjetivo'}]},{t:'Los maestros prepararon una divertida excursión.',ws:[{w:'Los',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'maestros',c:'Sustantivo'},{w:'prepararon',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'divertida',c:'Adjetivo'},{w:'excursión',c:'Sustantivo'}]},{t:'Mi abuela cocinó unas tortitas deliciosas.',ws:[{w:'Mi',c:'Determinante',sub:'Posesivo'},{w:'abuela',c:'Sustantivo'},{w:'cocinó',c:'Verbo'},{w:'unas',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'tortitas',c:'Sustantivo'},{w:'deliciosas',c:'Adjetivo'}]},{t:'Mi mamá prepara una rica cena.',ws:[{w:'Mi',c:'Determinante',sub:'Posesivo'},{w:'mamá',c:'Sustantivo'},{w:'prepara',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'rica',c:'Adjetivo'},{w:'cena',c:'Sustantivo'}]},{t:'Mi primo pequeño escribió esta carta.',ws:[{w:'Mi',c:'Determinante',sub:'Posesivo'},{w:'primo',c:'Sustantivo'},{w:'pequeño',c:'Adjetivo'},{w:'escribió',c:'Verbo'},{w:'esta',c:'Determinante',sub:'Demostrativo'},{w:'carta',c:'Sustantivo'}]},{t:'Nosotros bailamos una canción alegre.',ws:[{w:'Nosotros',c:'Pronombre personal'},{w:'bailamos',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'canción',c:'Sustantivo'},{w:'alegre',c:'Adjetivo'}]},{t:'Nosotros disfrutaremos una excursión inolvidable.',ws:[{w:'Nosotros',c:'Pronombre personal'},{w:'disfrutaremos',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'excursión',c:'Sustantivo'},{w:'inolvidable',c:'Adjetivo'}]},{t:'Ellos recorren los antiguos caminos.',ws:[{w:'Ellos',c:'Pronombre personal'},{w:'recorren',c:'Verbo'},{w:'los',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'antiguos',c:'Adjetivo'},{w:'caminos',c:'Sustantivo'}]},{t:'Nosotros recordaremos este maravilloso curso.',ws:[{w:'Nosotros',c:'Pronombre personal'},{w:'recordaremos',c:'Verbo'},{w:'este',c:'Determinante',sub:'Demostrativo'},{w:'maravilloso',c:'Adjetivo'},{w:'curso',c:'Sustantivo'}]},{t:'Tú compraste unas bebidas refrescantes.',ws:[{w:'Tú',c:'Pronombre personal'},{w:'compraste',c:'Verbo'},{w:'unas',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'bebidas',c:'Sustantivo'},{w:'refrescantes',c:'Adjetivo'}]},{t:'Tú escuchas aquella canción antigua.',ws:[{w:'Tú',c:'Pronombre personal'},{w:'escuchas',c:'Verbo'},{w:'aquella',c:'Determinante',sub:'Demostrativo'},{w:'canción',c:'Sustantivo'},{w:'antigua',c:'Adjetivo'}]},{t:'Este libro tiene unas historias preciosas.',ws:[{w:'Este',c:'Determinante',sub:'Demostrativo'},{w:'libro',c:'Sustantivo'},{w:'tiene',c:'Verbo'},{w:'unas',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'historias',c:'Sustantivo'},{w:'preciosas',c:'Adjetivo'}]},{t:'Una calurosa mañana montamos un complicado puzzle.',ws:[{w:'Una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'calurosa',c:'Adjetivo'},{w:'mañana',c:'Sustantivo'},{w:'montamos',c:'Verbo'},{w:'un',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'complicado',c:'Adjetivo'},{w:'puzzle',c:'Sustantivo'}]},{t:'Una fría mañana compré este gorro azul.',ws:[{w:'Una',c:'Determinante',sub:'Artículo',sub2:'Indeterminado'},{w:'fría',c:'Adjetivo'},{w:'mañana',c:'Sustantivo'},{w:'compré',c:'Verbo'},{w:'este',c:'Determinante',sub:'Demostrativo'},{w:'gorro',c:'Sustantivo'},{w:'azul',c:'Adjetivo'}]},{t:'Yo compré aquel patinete eléctrico.',ws:[{w:'Yo',c:'Pronombre personal'},{w:'compré',c:'Verbo'},{w:'aquel',c:'Determinante',sub:'Demostrativo'},{w:'patinete',c:'Sustantivo'},{w:'eléctrico',c:'Adjetivo'}]},{t:'Ellos comprarán los regalos esta tarde.',ws:[{w:'Ellos',c:'Pronombre personal'},{w:'comprarán',c:'Verbo'},{w:'los',c:'Determinante',sub:'Artículo',sub2:'Determinado'},{w:'regalos',c:'Sustantivo'},{w:'esta',c:'Determinante',sub:'Demostrativo'},{w:'tarde',c:'Sustantivo'}]}];
 
-/* BANCO DE ORACIONES CON EL TIPO DE DETERMINANTE ESPECIFICADO */
-var allSentences=[
-{t:'Aquel perro negro corre rápido.',ws:[{w:'Aquel',c:'Determinante',sub:'Demostrativo'},{w:'perro',c:'Sustantivo'},{w:'negro',c:'Adjetivo'},{w:'corre',c:'Verbo'},{w:'rápido',c:'Adjetivo'}]},
-{t:'La socorrista es una estupenda nadadora.',ws:[{w:'La',c:'Determinante',sub:'Artículo'},{w:'socorrista',c:'Sustantivo'},{w:'es',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'estupenda',c:'Adjetivo'},{w:'nadadora',c:'Sustantivo'}]},
-{t:'Aquella mañana olvidé mi jersey rosa.',ws:[{w:'Aquella',c:'Determinante',sub:'Demostrativo'},{w:'mañana',c:'Sustantivo'},{w:'olvidé',c:'Verbo'},{w:'mi',c:'Determinante',sub:'Posesivo'},{w:'jersey',c:'Sustantivo'},{w:'rosa',c:'Adjetivo'}]},
-{t:'Aquellos pájaros comieron este delicioso alpiste.',ws:[{w:'Aquellos',c:'Determinante',sub:'Demostrativo'},{w:'pájaros',c:'Sustantivo'},{w:'comieron',c:'Verbo'},{w:'este',c:'Determinante',sub:'Demostrativo'},{w:'delicioso',c:'Adjetivo'},{w:'alpiste',c:'Sustantivo'}]},
-{t:'El hombre alto pintó su antigua casa.',ws:[{w:'El',c:'Determinante',sub:'Artículo'},{w:'hombre',c:'Sustantivo'},{w:'alto',c:'Adjetivo'},{w:'pintó',c:'Verbo'},{w:'su',c:'Determinante',sub:'Posesivo'},{w:'antigua',c:'Adjetivo'},{w:'casa',c:'Sustantivo'}]},
-{t:'El mago sacó un conejo blanco.',ws:[{w:'El',c:'Determinante',sub:'Artículo'},{w:'mago',c:'Sustantivo'},{w:'sacó',c:'Verbo'},{w:'un',c:'Determinante',sub:'Artículo'},{w:'conejo',c:'Sustantivo'},{w:'blanco',c:'Adjetivo'}]},
-{t:'Ellos compraron un diamante carísimo.',ws:[{w:'Ellos',c:'Pronombre personal'},{w:'compraron',c:'Verbo'},{w:'un',c:'Determinante',sub:'Artículo'},{w:'diamante',c:'Sustantivo'},{w:'carísimo',c:'Adjetivo'}]},
-{t:'Ella leyó unos libros interesantes.',ws:[{w:'Ella',c:'Pronombre personal'},{w:'leyó',c:'Verbo'},{w:'unos',c:'Determinante',sub:'Artículo'},{w:'libros',c:'Sustantivo'},{w:'interesantes',c:'Adjetivo'}]},
-{t:'Ella mira las estrellas brillantes.',ws:[{w:'Ella',c:'Pronombre personal'},{w:'mira',c:'Verbo'},{w:'las',c:'Determinante',sub:'Artículo'},{w:'estrellas',c:'Sustantivo'},{w:'brillantes',c:'Adjetivo'}]},
-{t:'El guerrero lanzó su lanza afilada.',ws:[{w:'El',c:'Determinante',sub:'Artículo'},{w:'guerrero',c:'Sustantivo'},{w:'lanzó',c:'Verbo'},{w:'su',c:'Determinante',sub:'Posesivo'},{w:'lanza',c:'Sustantivo'},{w:'afilada',c:'Adjetivo'}]},
-{t:'Ese libro cuenta una historia misteriosa.',ws:[{w:'Ese',c:'Determinante',sub:'Demostrativo'},{w:'libro',c:'Sustantivo'},{w:'cuenta',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'historia',c:'Sustantivo'},{w:'misteriosa',c:'Adjetivo'}]},
-{t:'Ese rico pastel tiene las velas encendidas.',ws:[{w:'Ese',c:'Determinante',sub:'Demostrativo'},{w:'rico',c:'Adjetivo'},{w:'pastel',c:'Sustantivo'},{w:'tiene',c:'Verbo'},{w:'las',c:'Determinante',sub:'Artículo'},{w:'velas',c:'Sustantivo'},{w:'encendidas',c:'Adjetivo'}]},
-{t:'Esta tarde arreglaré mi bicicleta vieja.',ws:[{w:'Esta',c:'Determinante',sub:'Demostrativo'},{w:'tarde',c:'Sustantivo'},{w:'arreglaré',c:'Verbo'},{w:'mi',c:'Determinante',sub:'Posesivo'},{w:'bicicleta',c:'Sustantivo'},{w:'vieja',c:'Adjetivo'}]},
-{t:'Esta tarde escribiré una bonita carta.',ws:[{w:'Esta',c:'Determinante',sub:'Demostrativo'},{w:'tarde',c:'Sustantivo'},{w:'escribiré',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'bonita',c:'Adjetivo'},{w:'carta',c:'Sustantivo'}]},
-{t:'Juan cantó una canción preciosa.',ws:[{w:'Juan',c:'Sustantivo'},{w:'cantó',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'canción',c:'Sustantivo'},{w:'preciosa',c:'Adjetivo'}]},
-{t:'Juan preparó una cena deliciosa.',ws:[{w:'Juan',c:'Sustantivo'},{w:'preparó',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'cena',c:'Sustantivo'},{w:'deliciosa',c:'Adjetivo'}]},
-{t:'La antigua casa tiene unas ventanas pequeñas.',ws:[{w:'La',c:'Determinante',sub:'Artículo'},{w:'antigua',c:'Adjetivo'},{w:'casa',c:'Sustantivo'},{w:'tiene',c:'Verbo'},{w:'unas',c:'Determinante',sub:'Artículo'},{w:'ventanas',c:'Sustantivo'},{w:'pequeñas',c:'Adjetivo'}]},
-{t:'Las jugadoras firmaron mi camiseta deportiva.',ws:[{w:'Las',c:'Determinante',sub:'Artículo'},{w:'jugadoras',c:'Sustantivo'},{w:'firmaron',c:'Verbo'},{w:'mi',c:'Determinante',sub:'Posesivo'},{w:'camiseta',c:'Sustantivo'},{w:'deportiva',c:'Adjetivo'}]},
-{t:'Los bomberos apagaron este gran incendio.',ws:[{w:'Los',c:'Determinante',sub:'Artículo'},{w:'bomberos',c:'Sustantivo'},{w:'apagaron',c:'Verbo'},{w:'este',c:'Determinante',sub:'Demostrativo'},{w:'gran',c:'Adjetivo'},{w:'incendio',c:'Sustantivo'}]},
-{t:'Los bomberos rescatan un perro herido.',ws:[{w:'Los',c:'Determinante',sub:'Artículo'},{w:'bomberos',c:'Sustantivo'},{w:'rescatan',c:'Verbo'},{w:'un',c:'Determinante',sub:'Artículo'},{w:'perro',c:'Sustantivo'},{w:'herido',c:'Adjetivo'}]},
-{t:'Los científicos encontraron una nueva vacuna.',ws:[{w:'Los',c:'Determinante',sub:'Artículo'},{w:'científicos',c:'Sustantivo'},{w:'encontraron',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'nueva',c:'Adjetivo'},{w:'vacuna',c:'Sustantivo'}]},
-{t:'Los hombres cavernícolas lanzaban lanzas afiladas.',ws:[{w:'Los',c:'Determinante',sub:'Artículo'},{w:'hombres',c:'Sustantivo'},{w:'cavernícolas',c:'Adjetivo'},{w:'lanzaban',c:'Verbo'},{w:'lanzas',c:'Sustantivo'},{w:'afiladas',c:'Adjetivo'}]},
-{t:'Los maestros prepararon una divertida excursión.',ws:[{w:'Los',c:'Determinante',sub:'Artículo'},{w:'maestros',c:'Sustantivo'},{w:'prepararon',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'divertida',c:'Adjetivo'},{w:'excursión',c:'Sustantivo'}]},
-{t:'Mi abuela cocinó unas tortitas deliciosas.',ws:[{w:'Mi',c:'Determinante',sub:'Posesivo'},{w:'abuela',c:'Sustantivo'},{w:'cocinó',c:'Verbo'},{w:'unas',c:'Determinante',sub:'Artículo'},{w:'tortitas',c:'Sustantivo'},{w:'deliciosas',c:'Adjetivo'}]},
-{t:'Mi mamá prepara una rica cena.',ws:[{w:'Mi',c:'Determinante',sub:'Posesivo'},{w:'mamá',c:'Sustantivo'},{w:'prepara',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'rica',c:'Adjetivo'},{w:'cena',c:'Sustantivo'}]},
-{t:'Mi primo pequeño escribió esta carta.',ws:[{w:'Mi',c:'Determinante',sub:'Posesivo'},{w:'primo',c:'Sustantivo'},{w:'pequeño',c:'Adjetivo'},{w:'escribió',c:'Verbo'},{w:'esta',c:'Determinante',sub:'Demostrativo'},{w:'carta',c:'Sustantivo'}]},
-{t:'Nosotros bailamos una canción alegre.',ws:[{w:'Nosotros',c:'Pronombre personal'},{w:'bailamos',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'canción',c:'Sustantivo'},{w:'alegre',c:'Adjetivo'}]},
-{t:'Nosotros disfrutaremos una excursión inolvidable.',ws:[{w:'Nosotros',c:'Pronombre personal'},{w:'disfrutaremos',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'excursión',c:'Sustantivo'},{w:'inolvidable',c:'Adjetivo'}]},
-{t:'Ellos recorren los antiguos caminos.',ws:[{w:'Ellos',c:'Pronombre personal'},{w:'recorren',c:'Verbo'},{w:'los',c:'Determinante',sub:'Artículo'},{w:'antiguos',c:'Adjetivo'},{w:'caminos',c:'Sustantivo'}]},
-{t:'Nosotros recordaremos este maravilloso curso.',ws:[{w:'Nosotros',c:'Pronombre personal'},{w:'recordaremos',c:'Verbo'},{w:'este',c:'Determinante',sub:'Demostrativo'},{w:'maravilloso',c:'Adjetivo'},{w:'curso',c:'Sustantivo'}]},
-{t:'Tú compraste unas bebidas refrescantes.',ws:[{w:'Tú',c:'Pronombre personal'},{w:'compraste',c:'Verbo'},{w:'unas',c:'Determinante',sub:'Artículo'},{w:'bebidas',c:'Sustantivo'},{w:'refrescantes',c:'Adjetivo'}]},
-{t:'Tú escuchas aquella canción antigua.',ws:[{w:'Tú',c:'Pronombre personal'},{w:'escuchas',c:'Verbo'},{w:'aquella',c:'Determinante',sub:'Demostrativo'},{w:'canción',c:'Sustantivo'},{w:'antigua',c:'Adjetivo'}]},
-{t:'Ella escribió una carta a su amigo.',ws:[{w:'Ella',c:'Pronombre personal'},{w:'escribió',c:'Verbo'},{w:'una',c:'Determinante',sub:'Artículo'},{w:'carta',c:'Sustantivo'},{w:'a',c:'Determinante',sub:'Artículo'},{w:'su',c:'Determinante',sub:'Posesivo'},{w:'amigo',c:'Sustantivo'}]},
-{t:'Una calurosa mañana montamos un complicado puzzle.',ws:[{w:'Una',c:'Determinante',sub:'Artículo'},{w:'calurosa',c:'Adjetivo'},{w:'mañana',c:'Sustantivo'},{w:'montamos',c:'Verbo'},{w:'un',c:'Determinante',sub:'Artículo'},{w:'complicado',c:'Adjetivo'},{w:'puzzle',c:'Sustantivo'}]},
-{t:'Una fría mañana compré este gorro azul.',ws:[{w:'Una',c:'Determinante',sub:'Artículo'},{w:'fría',c:'Adjetivo'},{w:'mañana',c:'Sustantivo'},{w:'compré',c:'Verbo'},{w:'este',c:'Determinante',sub:'Demostrativo'},{w:'gorro',c:'Sustantivo'},{w:'azul',c:'Adjetivo'}]},
-{t:'Yo compré aquel patinete eléctrico.',ws:[{w:'Yo',c:'Pronombre personal'},{w:'compré',c:'Verbo'},{w:'aquel',c:'Determinante',sub:'Demostrativo'},{w:'patinete',c:'Sustantivo'},{w:'eléctrico',c:'Adjetivo'}]},
-{t:'Él compra regalos para su familia.',ws:[{w:'Él',c:'Pronombre personal'},{w:'compra',c:'Verbo'},{w:'regalos',c:'Sustantivo'},{w:'para',c:'Determinante',sub:'Artículo'},{w:'su',c:'Determinante',sub:'Posesivo'},{w:'familia',c:'Sustantivo'}]}
-];
+/* ════════════════════════════════
+   MENÚ FLOTANTE – lógica central
+   El menú es un único elemento hijo del words-area.
+   Se posiciona con left/top calculados en JS según
+   la posición de la palabra seleccionada.
+════════════════════════════════ */
+var gameState={idx:0,solved:0,busy:false,totalWords:0,sentences:[],activeSpan:null,currentAreaId:null,currentMenuId:null,currentItem:null};
 
-var gameState = { idx:0, solved:0, busy:false, totalWords:0, sentences:[] };
+function getMenu(){return document.getElementById(gameState.currentMenuId||'floatingMenu')}
 
-function initContextGame(screenId, boxId, areaId, fbId, progId, numSentences, isPractice) {
-    gameState.idx = 0;gameState.solved = 0;gameState.busy = false;gameState.totalWords = 0;
-    for(var i=0; i<5; i++){var seg = document.getElementById('segG3_'+i);if(seg) seg.classList.remove('filled');}
-    if (isPractice) {gameState.sentences = shuffle(allSentences.slice());} else {gameState.sentences = shuffle(allSentences.slice()).slice(0, numSentences);}
-    for (var i = 0; i < gameState.sentences.length; i++) {gameState.totalWords += gameState.sentences[i].ws.length;}
-    var fillEl = document.getElementById(progId).querySelector('.progress-fill');if(fillEl) fillEl.style.width = '0%';
-    renderNextSentence(screenId, boxId, areaId, fbId, progId, isPractice);
+/* Posiciona el menú justo debajo de la palabra activa, centrado sobre ella */
+function positionMenu(span,area,menu){
+  var areaRect=area.getBoundingClientRect();
+  var spanRect=span.getBoundingClientRect();
+  // Offset de la palabra respecto al área (con scroll del área incluido)
+  var relLeft=spanRect.left-areaRect.left+area.scrollLeft;
+  var relTop=spanRect.top-areaRect.top+area.scrollTop;
+  var menuW=menu.offsetWidth||270;
+  // Centrar el menú sobre la palabra
+  var left=relLeft+spanRect.width/2-menuW/2;
+  // Limitar para no salir por los bordes
+  var maxLeft=areaRect.width-menuW-4;
+  left=Math.max(4,Math.min(left,maxLeft));
+  var top=relTop+spanRect.height+10; // 10px por debajo de la palabra
+  menu.style.left=left+'px';
+  menu.style.top=top+'px';
+  // Ajustar la flecha decorativa para que apunte a la palabra
+  var arrowLeft=relLeft+spanRect.width/2-left;
+  arrowLeft=Math.max(16,Math.min(arrowLeft,menuW-16));
+  menu.style.setProperty('--arrow-left',arrowLeft+'px');
 }
 
-function renderNextSentence(screenId, boxId, areaId, fbId, progId, isPractice) {
-    gameState.busy = false;var data = gameState.sentences[gameState.idx];var fb = document.getElementById(fbId);fb.textContent = '';fb.className = 'feedback-msg';document.getElementById(boxId).textContent = data.t;var area = document.getElementById(areaId);area.innerHTML = '';
-    
-    data.ws.forEach(function(item, idx) {
-        var wrap = document.createElement('div');wrap.style.cssText = 'position:relative;display:inline-block';var span = document.createElement('span');span.className = 'ctx-word';span.textContent = item.w;var menu = document.createElement('div');menu.className = 'ctx-menu';
-        
-        catOpts.forEach(function(cat) {
-            var btn = document.createElement('button');btn.className = 'ctx-menu-btn ' + catBtnClass[cat];btn.textContent = cat;
-            
-            if(cat === 'Determinante') {
-                var submenu = document.createElement('div');submenu.className = 'det-submenu';
-                var tipos = ['Artículo', 'Posesivo', 'Demostrativo'];
-                tipos.forEach(function(tipo) {
-                    var subbtn = document.createElement('button');subbtn.className = 'det-sub-btn';subbtn.textContent = tipo;
-                    subbtn.onclick = function(e) {
-                        e.stopPropagation();totalAttempts++;
-                        if(item.c === 'Determinante' && item.sub === tipo) {
-                            playS('correct');span.classList.add('solved', catCSS[catMap[item.c]]);menu.classList.remove('show');submenu.classList.remove('show');menu.style.display = 'none';fb.textContent = '✅ ¡Correcto!';fb.className = 'feedback-msg ok';gameState.solved++;
-                            var fillEl = document.getElementById(progId).querySelector('.progress-fill');if(fillEl) fillEl.style.width = (gameState.solved / gameState.totalWords * 100) + '%';
-                            checkSentenceEnd(screenId, boxId, areaId, fbId, progId, isPractice, data);
-                        } else {
-                            playS('error');fb.textContent = '❌ Incorrecto';fb.className = 'feedback-msg err';menu.classList.remove('show');submenu.classList.remove('show');
-                        }
-                    };
-                    submenu.appendChild(subbtn);
-                });
-                btn.appendChild(submenu);
-                // AL CLICAR EN DETERMINANTE SOLO SE DESPLIEGA EL SUBMENÚ (No consume intento)
-                btn.onclick = function(e){ 
-                    e.stopPropagation();
-                    submenu.classList.toggle('show');
-                };
-            } else {
-                btn.onclick = function(e) {
-                    e.stopPropagation();totalAttempts++;
-                    if (cat === item.c) {
-                        playS('correct');span.classList.add('solved', catCSS[catMap[item.c]]);menu.classList.remove('show');menu.style.display = 'none';fb.textContent = '✅ ¡Correcto!';fb.className = 'feedback-msg ok';gameState.solved++;
-                        var fillEl = document.getElementById(progId).querySelector('.progress-fill');if(fillEl) fillEl.style.width = (gameState.solved / gameState.totalWords * 100) + '%';
-                        checkSentenceEnd(screenId, boxId, areaId, fbId, progId, isPractice, data);
-                    } else {
-                        playS('error');fb.textContent = '❌ Incorrecto';fb.className = 'feedback-msg err';menu.classList.remove('show');
-                    }
-                };
-            }
-            menu.appendChild(btn);
-        });
-        
-        wrap.appendChild(span);wrap.appendChild(menu);
-        span.onclick = function(e) {e.stopPropagation();if (span.classList.contains('solved') || gameState.busy) return;document.querySelectorAll('.ctx-menu.show').forEach(function(m){m.classList.remove('show')});menu.classList.add('show');};area.appendChild(wrap);
-    });showScreen(screenId);
+function openMenu(span,area,menu,buildFn){
+  closeAllMenus();
+  gameState.activeSpan=span;
+  span.classList.add('active');
+  buildFn(menu);
+  menu.classList.add('show');
+  // Medir y posicionar en el siguiente frame cuando ya tiene dimensiones reales
+  requestAnimationFrame(function(){
+    positionMenu(span,area,menu);
+  });
 }
 
-function checkSentenceEnd(screenId, boxId, areaId, fbId, progId, isPractice, data) {
-    if (gameState.solved === data.ws.length) {
-        gameState.busy = true;var fb = document.getElementById(fbId);fb.textContent = '🎉 ¡Oración completada!';fb.className = 'feedback-msg ok';var currentSeg = document.getElementById('segG3_'+gameState.idx);if(currentSeg) currentSeg.classList.add('filled');
-        setTimeout(function() {gameState.idx++;gameState.solved = 0;if (gameState.idx < gameState.sentences.length) {renderNextSentence(screenId, boxId, areaId, fbId, progId, isPractice);} else if (isPractice) {stopTimer();showScreen('practiceDoneScreen');} else {irAFinal(false);}}, 1200);
-    }
+function closeAllMenus(){
+  ['floatingMenu','floatingMenuP'].forEach(function(id){
+    var m=document.getElementById(id);
+    if(m){m.classList.remove('show');m.innerHTML=''}
+  });
+  if(gameState.activeSpan){gameState.activeSpan.classList.remove('active');gameState.activeSpan=null}
 }
 
-document.addEventListener('click', function(e) {if (!e.target.closest('.ctx-menu') && !e.target.closest('.det-submenu')) {document.querySelectorAll('.ctx-menu.show').forEach(function(m) { m.classList.remove('show'); }); document.querySelectorAll('.det-submenu.show').forEach(function(m) { m.classList.remove('show'); });}});
+/* ─── Construcción del menú principal ─── */
+function buildMainMenu(menu,span,item,area,screenId,boxId,areaId,progId,isPractice,data){
+  menu.innerHTML='';
+  catOpts.forEach(function(cat){
+    var btn=document.createElement('button');
+    btn.className='ctx-menu-btn '+catBtnClass[cat];
+    btn.textContent=cat;
+    btn.onclick=function(e){
+      e.stopPropagation();
+      if(cat==='Determinante'){
+        // Nivel 2: subtipo de determinante
+        buildSubMenu(menu,span,item,area,screenId,boxId,areaId,progId,isPractice,data);
+      } else {
+        totalAttempts++;
+        if(cat===item.c){handleCorrect(span,item,progId,screenId,boxId,areaId,isPractice,data)}
+        else{handleIncorrect(span)}
+      }
+    };
+    menu.appendChild(btn);
+  });
+}
 
-function initGame3() {initContextGame('game3Screen', 'sentenceBox', 'wordsArea', 'feedbackMsg', 'progG3', 5, false);}
-function initPractice() {initContextGame('practiceScreen', 'practiceSentence', 'practiceWords', 'practiceFeedback', 'progGP', 0, true);}
+function buildSubMenu(menu,span,item,area,screenId,boxId,areaId,progId,isPractice,data){
+  menu.innerHTML='';
+  var tipos=[{n:'Artículo',s:true},{n:'Posesivo',s:false},{n:'Demostrativo',s:false}];
+  tipos.forEach(function(tipo){
+    var btn=document.createElement('button');
+    btn.className='ctx-menu-btn sub-btn';
+    btn.textContent=tipo.n+(tipo.s?' ▸':'');
+    btn.onclick=function(e){
+      e.stopPropagation();
+      if(tipo.s){
+        buildSub2Menu(menu,span,item,area,screenId,boxId,areaId,progId,isPractice,data,tipo.n);
+      } else {
+        totalAttempts++;
+        if(item.c==='Determinante'&&item.sub===tipo.n){handleCorrect(span,item,progId,screenId,boxId,areaId,isPractice,data)}
+        else{handleIncorrect(span)}
+      }
+    };
+    menu.appendChild(btn);
+  });
+  // Reposicionar tras cambiar el contenido
+  requestAnimationFrame(function(){positionMenu(span,area,menu)});
+}
 
-function irAFinal(fromPractice) {
-    stopTimer();if(fromPractice){showScreen('practiceDoneScreen');return}
-    var minInt = 5 + 25 + gameState.totalWords;var score = 100 - ((totalAttempts - minInt) * (100 / minInt));score = Math.max(0, Math.round(score));var elapsed = getElapsed();document.getElementById('finalScore').textContent = score;document.getElementById('finalTime').textContent = fmtT(elapsed);var trophy = document.getElementById('trophyBox'), msg = document.getElementById('finalMsg');
-    if(score===100){trophy.style.display='block';msg.textContent='¡Genial! ¡Puntuación perfecta!';msg.style.color='var(--green)';playS('victory');createConfetti()}
-    else if(score>=80){trophy.style.display='none';msg.textContent='Casi lo logras. ¡Sigue practicando!';msg.style.color='var(--orange)';playS('completed')}
-    else if(score>=50){trophy.style.display='none';msg.textContent='No está mal, pero aún puedes hacerlo mejor';msg.style.color='var(--blue-700)';playS('completed')}
-    else{trophy.style.display='none';msg.textContent='Vaya desastre... ¿Seguro que has estudiado?';msg.style.color='var(--red)';playS('completed')}
-    showScreen('finalScreen');
+function buildSub2Menu(menu,span,item,area,screenId,boxId,areaId,progId,isPractice,data,parentTipo){
+  menu.innerHTML='';
+  ['Determinado','Indeterminado'].forEach(function(art){
+    var btn=document.createElement('button');
+    btn.className='ctx-menu-btn sub-btn';
+    btn.textContent=art;
+    btn.onclick=function(e){
+      e.stopPropagation();
+      totalAttempts++;
+      if(item.c==='Determinante'&&item.sub===parentTipo&&item.sub2===art){handleCorrect(span,item,progId,screenId,boxId,areaId,isPractice,data)}
+      else{handleIncorrect(span)}
+    };
+    menu.appendChild(btn);
+  });
+  requestAnimationFrame(function(){positionMenu(span,area,menu)});
+}
+
+/* ─── Resultado correcto / incorrecto ─── */
+function handleCorrect(span,item,progId,screenId,boxId,areaId,isPractice,data){
+  playS('correct');
+  // Cerrar menú primero (alumno ve la oración completa)
+  closeAllMenus();
+  span.classList.remove('active');
+  span.classList.add('solved',catCSS[catMap[item.c]]);
+  gameState.solved++;
+  var fillEl=document.getElementById(progId).querySelector('.progress-fill');
+  if(fillEl)fillEl.style.width=(gameState.solved/gameState.totalWords*100)+'%';
+  if(gameState.solved===data.ws.length){
+    gameState.busy=true;playS('completed');
+    setTimeout(function(){
+      gameState.idx++;gameState.solved=0;
+      if(gameState.idx<gameState.sentences.length){renderNextSentence(screenId,boxId,areaId,progId,isPractice)}
+      else if(isPractice){stopTimer();showScreen('practiceDoneScreen')}
+      else{irAFinal(false)}
+    },800);
+  }
+}
+
+function handleIncorrect(span){
+  playS('error');
+  // Cerrar menú → alumno ve la oración para analizar el contexto
+  closeAllMenus();
+  span.classList.add('flash-error');
+  setTimeout(function(){span.classList.remove('flash-error')},400);
+}
+
+/* ─── Renderizado de oraciones ─── */
+function initContextGame(screenId,boxId,areaId,progId,numSentences,isPractice){
+  gameState.idx=0;gameState.solved=0;gameState.busy=false;gameState.totalWords=0;
+  gameState.activeSpan=null;
+  gameState.currentAreaId=areaId;
+  if(isPractice){gameState.sentences=shuffle(allSentences.slice())}
+  else{gameState.sentences=shuffle(allSentences.slice()).slice(0,numSentences)}
+  for(var i=0;i<gameState.sentences.length;i++){gameState.totalWords+=gameState.sentences[i].ws.length}
+  var fillEl=document.getElementById(progId).querySelector('.progress-fill');
+  if(fillEl)fillEl.style.width='0%';
+  renderNextSentence(screenId,boxId,areaId,progId,isPractice);
+}
+
+function renderNextSentence(screenId,boxId,areaId,progId,isPractice){
+  gameState.busy=false;
+  var data=gameState.sentences[gameState.idx];
+  document.getElementById(boxId).textContent=data.t;
+  var area=document.getElementById(areaId);
+  var menuId=isPractice?'floatingMenuP':'floatingMenu';
+  // Detach floating menu before clearing, then re-attach
+  var menu=document.getElementById(menuId);
+  if(menu&&menu.parentNode===area) area.removeChild(menu);
+  area.innerHTML='';
+  if(!menu){menu=document.createElement('div');menu.id=menuId;}
+  menu.classList.remove('show');
+  menu.innerHTML='';
+  area.appendChild(menu);
+
+  data.ws.forEach(function(item){
+    var span=document.createElement('span');
+    span.className='ctx-word';
+    span.textContent=item.w;
+    span.onclick=function(e){
+      e.stopPropagation();
+      if(span.classList.contains('solved')||gameState.busy)return;
+      openMenu(span,area,menu,function(m){
+        buildMainMenu(m,span,item,area,screenId,boxId,areaId,progId,isPractice,data);
+      });
+    };
+    area.appendChild(span);
+  });
+  showScreen(screenId);
+}
+
+/* Cerrar al tocar fuera del área de palabras */
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.words-area')){closeAllMenus()}
+});
+
+function initGame3(){initContextGame('game3Screen','sentenceBox','wordsArea','progG3',5,false)}
+function initPractice(){initContextGame('practiceScreen','practiceSentence','practiceWords','progGP',0,true)}
+
+/* ════════════════════════════════
+   PANTALLA FINAL
+════════════════════════════════ */
+function irAFinal(fromPractice){
+  stopTimer();
+  if(fromPractice){showScreen('practiceDoneScreen');return}
+  var minInt=5+gameState.totalWords;
+  var score=100-((totalAttempts-minInt)*(100/minInt));
+  score=Math.max(0,Math.round(score));
+  var elapsed=getElapsed();
+  document.getElementById('finalScore').textContent=score;
+  document.getElementById('finalTime').textContent=fmtT(elapsed);
+  var trophy=document.getElementById('trophyBox'),msg=document.getElementById('finalMsg');
+  if(score===100){trophy.style.display='block';msg.textContent='¡Genial! ¡Puntuación perfecta!';msg.style.color='var(--green)';playS('victory');createConfetti()}
+  else if(score>=80){trophy.style.display='none';msg.textContent='Casi lo logras. ¡Sigue practicando!';msg.style.color='var(--orange)';playS('completed')}
+  else if(score>=50){trophy.style.display='none';msg.textContent='No está mal, pero aún puedes hacerlo mejor';msg.style.color='var(--blue-700)';playS('completed')}
+  else{trophy.style.display='none';msg.textContent='Vaya desastre... ¿Seguro que has estudiado?';msg.style.color='var(--red)';playS('completed')}
+  showScreen('finalScreen');
 }
 
 document.getElementById('backBtn').onclick=function(){playS('tap');stopTimer();showScreen('startScreen')};
