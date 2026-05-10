@@ -97,7 +97,7 @@ h1{color:var(--blue-dark);font-size:clamp(2rem,5.2vw,3.1rem);font-weight:900;let
 .ctx-word.active{background-color:#3498db !important;color:white !important;transform:scale(1.08);box-shadow:0 4px 12px rgba(52,152,219,.5)}
 
 /* ─── MENÚ FLOTANTE: oculto por defecto, nunca ocupa espacio en el flujo ─── */
-#floatingMenu,#floatingMenuP{position:absolute;display:none;background:white;border:2px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.18);z-index:100;min-width:260px;padding:6px;flex-direction:column;gap:5px;opacity:0;transition:opacity .18s ease}
+#floatingMenu,#floatingMenuP{position:absolute;display:none;background:white;border:2px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.18);z-index:100;min-width:260px;max-width:calc(100% - 8px);width:max-content;padding:6px;flex-direction:column;gap:5px;opacity:0;transition:opacity .18s ease}
 #floatingMenu.show,#floatingMenuP.show{display:flex;opacity:1;pointer-events:all}
 #floatingMenu::before,#floatingMenuP::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:8px solid #e5e7eb}
 #floatingMenu::after,#floatingMenuP::after{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid white}
@@ -125,7 +125,8 @@ h1{color:var(--blue-dark);font-size:clamp(2rem,5.2vw,3.1rem);font-weight:900;let
 .ctx-menu-btn.btn-pron{background-color:#fee2e2;color:#dc2626}
 .ctx-menu-btn.sub-btn{background-color:#fefce8;color:#713f12;font-size:.95rem}
 
-.practice-complete{text-align:center;padding:2rem 1rem}
+.sentence-counter{font-weight:800;color:var(--orange-700);font-size:clamp(.85rem,2vw,1rem);white-space:nowrap;background:#fff3e0;border-radius:8px;padding:2px 10px;border:2px solid var(--orange)}
+
 .confetti{position:fixed;width:10px;height:10px;border-radius:50%;animation:confetti-fall 3s linear forwards;z-index:999}
 @keyframes confetti-fall{0%{transform:translate(0,-20px) rotate(0);opacity:1}100%{transform:translate(var(--tx),var(--ty)) rotate(360deg);opacity:0}}
 </style>
@@ -169,6 +170,7 @@ h1{color:var(--blue-dark);font-size:clamp(2rem,5.2vw,3.1rem);font-weight:900;let
 <header><h1>Análisis morfológico</h1></header>
 <div class="game-info">
   <div class="timer" id="timerG3">00:00.0</div>
+  <div class="sentence-counter" id="counterG3">Oración 1/5</div>
   <div class="progress-bar" id="progG3" style="display:flex;gap:0;padding:0"><div class="progress-fill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--orange),var(--orange-700));transition:width .3s ease;border-radius:999px"></div></div>
 </div>
 <div class="sentence-box" id="sentenceBox"></div>
@@ -194,6 +196,7 @@ h1{color:var(--blue-dark);font-size:clamp(2rem,5.2vw,3.1rem);font-weight:900;let
 <header><h1>Modo práctica</h1></header>
 <div class="game-info">
   <div class="timer" id="timerGP">00:00.0</div>
+  <div class="sentence-counter" id="counterGP">Oración 1</div>
   <div class="progress-bar" id="progGP" style="display:flex;gap:0;padding:0">
     <div class="progress-fill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--orange),var(--orange-700));transition:width .3s ease;border-radius:999px"></div>
   </div>
@@ -308,10 +311,10 @@ function buildMainMenu(menu,span,item,area,screenId,boxId,areaId,progId,isPracti
     btn.onclick=function(e){
       e.stopPropagation();
       if(cat==='Determinante'){
-        // Nivel 2: subtipo de determinante
+        // No es terminal: abre submenú sin contar intento
         buildSubMenu(menu,span,item,area,screenId,boxId,areaId,progId,isPractice,data);
       } else {
-        totalAttempts++;
+        totalAttempts++;  // terminal: Sustantivo, Adjetivo, Verbo, Pronombre personal
         if(cat===item.c){handleCorrect(span,item,progId,screenId,boxId,areaId,isPractice,data)}
         else{handleIncorrect(span)}
       }
@@ -330,16 +333,16 @@ function buildSubMenu(menu,span,item,area,screenId,boxId,areaId,progId,isPractic
     btn.onclick=function(e){
       e.stopPropagation();
       if(tipo.s){
+        // Artículo no es terminal: abre submenú sin contar intento
         buildSub2Menu(menu,span,item,area,screenId,boxId,areaId,progId,isPractice,data,tipo.n);
       } else {
-        totalAttempts++;
+        totalAttempts++;  // terminal: Posesivo o Demostrativo
         if(item.c==='Determinante'&&item.sub===tipo.n){handleCorrect(span,item,progId,screenId,boxId,areaId,isPractice,data)}
         else{handleIncorrect(span)}
       }
     };
     menu.appendChild(btn);
   });
-  // Reposicionar tras cambiar el contenido
   requestAnimationFrame(function(){positionMenu(span,area,menu)});
 }
 
@@ -351,7 +354,7 @@ function buildSub2Menu(menu,span,item,area,screenId,boxId,areaId,progId,isPracti
     btn.textContent=art;
     btn.onclick=function(e){
       e.stopPropagation();
-      totalAttempts++;
+      totalAttempts++;  // terminal: Determinado o Indeterminado
       if(item.c==='Determinante'&&item.sub===parentTipo&&item.sub2===art){handleCorrect(span,item,progId,screenId,boxId,areaId,isPractice,data)}
       else{handleIncorrect(span)}
     };
@@ -406,6 +409,14 @@ function renderNextSentence(screenId,boxId,areaId,progId,isPractice){
   gameState.busy=false;
   var data=gameState.sentences[gameState.idx];
   document.getElementById(boxId).textContent=data.t;
+  // Actualizar contador de oración
+  if(isPractice){
+    var cp=document.getElementById('counterGP');
+    if(cp) cp.textContent='Oración '+(gameState.idx+1);
+  } else {
+    var cg=document.getElementById('counterG3');
+    if(cg) cg.textContent='Oración '+(gameState.idx+1)+'/'+gameState.sentences.length;
+  }
   var area=document.getElementById(areaId);
   var menuId=isPractice?'floatingMenuP':'floatingMenu';
   // Detach floating menu before clearing, then re-attach
